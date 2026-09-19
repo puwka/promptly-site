@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy — Promptly</title>
+    <meta name="description" content="Privacy Policy for Promptly AI Browser Assistant." />
+    <link rel="icon" href="./favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="/">
+          <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="g" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#1f6bff" />
+                <stop offset="0.55" stop-color="#4d9cff" />
+                <stop offset="1" stop-color="#e8a317" />
+              </linearGradient>
+            </defs>
+            <path
+              fill="url(#g)"
+              d="M32 4 38.2 25.8 60 32 38.2 38.2 32 60 25.8 38.2 4 32 25.8 25.8Z"
+            />
+            <path fill="#e8a317" d="M48 38 50.2 45.8 58 48 50.2 50.2 48 58 45.8 50.2 38 48 45.8 45.8Z" />
+          </svg>
+          Promptly
+        </a>
+        <div class="nav__links">
+          <a href="/">Product</a>
+          <a href="/support">Support</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="page wrap prose">
+      <h1>Privacy Policy</h1>
+      <p class="lede">Last updated: September 19, 2026</p>
+
+      <p>
+        Promptly (“we”, “the extension”) is an AI Chrome extension that helps you ask questions about
+        selected text, images, and web pages.
+      </p>
+
+      <h2>What we collect</h2>
+      <p>Depending on how you use Promptly, we may process:</p>
+      <ul>
+        <li>
+          <strong>Installation id</strong> — a random local id used for Free/Pro usage limits.
+        </li>
+        <li>
+          <strong>Chrome profile email</strong> (optional) — to restore a paid subscription after
+          reinstall and sync settings / history / custom actions. Not used for advertising.
+        </li>
+        <li>
+          <strong>AI request payload</strong> — text, page excerpt, or image you choose to send,
+          transmitted to our backend to generate an answer.
+        </li>
+        <li>
+          <strong>AI request metadata</strong> — model name, context type, usage counts, timestamps.
+          Analytics do not store full prompts, full page HTML, or images.
+        </li>
+        <li>
+          <strong>Usage counters</strong> — Free daily limits and Pro weekly token limits.
+        </li>
+        <li>
+          <strong>Synced workspace data</strong> — when a Chrome profile email is available,
+          settings, custom actions, and conversations may sync so they survive reinstall.
+        </li>
+        <li>
+          <strong>Billing identifiers</strong> — Stripe customer / subscription ids for Promptly Pro.
+        </li>
+        <li>
+          <strong>Product analytics</strong> — aggregate events such as install or paywall viewed
+          (no prompt text, page content, cookies, or API keys).
+        </li>
+      </ul>
+
+      <h2>How AI requests work</h2>
+      <p>
+        Selected text / page excerpt / image is sent to our backend (Supabase Edge Function), which
+        calls NeuroAPI. Provider keys stay on the server and never ship inside the extension package.
+      </p>
+
+      <h2>Payments</h2>
+      <p>
+        Paid plans are processed by Stripe. Card details are entered on Stripe Checkout / Customer
+        Portal and are not stored by Promptly.
+      </p>
+
+      <h2>Cookies &amp; tracking</h2>
+      <p>
+        The extension does not use third-party advertising cookies. Analytics are first-party product
+        events stored in our Supabase project.
+      </p>
+
+      <h2>Data sharing</h2>
+      <p>We do not sell personal data. Subprocessors:</p>
+      <ul>
+        <li><strong>Supabase</strong> — database, Edge Functions, optional sync storage</li>
+        <li><strong>NeuroAPI</strong> — AI model inference</li>
+        <li><strong>Stripe</strong> — subscription payments</li>
+      </ul>
+
+      <h2>Your choices</h2>
+      <ul>
+        <li>Turn off or clear chat history in Settings.</li>
+        <li>Manage or cancel Pro via Settings → Manage subscription.</li>
+        <li>Uninstall the extension to stop local processing and new sync.</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <p>
+        Questions:
+        <a href="mailto:infopromptly@gmail.com">infopromptly@gmail.com</a>
+      </p>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__row">
+        <span>© <span id="y"></span> Promptly</span>
+        <nav aria-label="Footer">
+          <a href="/">Home</a>
+          <a href="/support">Support</a>
+        </nav>
+      </div>
+    </footer>
+    <script>
+      document.getElementById('y').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

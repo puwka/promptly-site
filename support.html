@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Support — Promptly</title>
+    <meta name="description" content="Get help with Promptly AI Browser Assistant." />
+    <link rel="icon" href="./favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="/">
+          <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="g" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#1f6bff" />
+                <stop offset="0.55" stop-color="#4d9cff" />
+                <stop offset="1" stop-color="#e8a317" />
+              </linearGradient>
+            </defs>
+            <path
+              fill="url(#g)"
+              d="M32 4 38.2 25.8 60 32 38.2 38.2 32 60 25.8 38.2 4 32 25.8 25.8Z"
+            />
+            <path fill="#e8a317" d="M48 38 50.2 45.8 58 48 50.2 50.2 48 58 45.8 50.2 38 48 45.8 45.8Z" />
+          </svg>
+          Promptly
+        </a>
+        <div class="nav__links">
+          <a href="/">Product</a>
+          <a href="/privacy">Privacy</a>
+          <a class="btn btn--primary" href="mailto:infopromptly@gmail.com">Email us</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="page wrap">
+      <h1>Support</h1>
+      <p class="lede">
+        Something stuck? Write us — we read every message. Include your Chrome version and
+        extension version from <code>chrome://extensions</code>.
+      </p>
+
+      <div class="panel">
+        <h2>Contact</h2>
+        <p>
+          Email:
+          <a class="mail" href="mailto:infopromptly@gmail.com">infopromptly@gmail.com</a>
+        </p>
+        <p class="muted" style="margin-top: 0.6rem; font-size: 0.92rem">
+          Replace this address in the HTML before go-live if you use a different inbox.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h2>Common fixes</h2>
+        <ul>
+          <li>Refresh the tab after installing or updating Promptly.</li>
+          <li>Confirm you are online — AI requests need network access.</li>
+          <li>If image analysis fails, try again or switch model family (GPT / Claude).</li>
+          <li>Free daily limit: wait until the next UTC day, or upgrade to Pro.</li>
+          <li>Pro weekly tokens exhausted: wait for the next week, or manage billing in Settings.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <h2>Billing</h2>
+        <p>
+          Manage or cancel Promptly Pro from the extension: <strong>Settings → Manage
+          subscription</strong> (Stripe Customer Portal).
+        </p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__row">
+        <span>© <span id="y"></span> Promptly</span>
+        <nav aria-label="Footer">
+          <a href="/">Home</a>
+          <a href="/privacy">Privacy</a>
+        </nav>
+      </div>
+    </footer>
+    <script>
+      document.getElementById('y').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

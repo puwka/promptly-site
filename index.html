@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Promptly — AI Browser Assistant</title>
+    <meta
+      name="description"
+      content="Ask AI about any text, image, or webpage directly from Chrome's side panel."
+    />
+    <link rel="icon" href="./favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="/">
+          <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
+            <defs>
+              <linearGradient id="g" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#1f6bff" />
+                <stop offset="0.55" stop-color="#4d9cff" />
+                <stop offset="1" stop-color="#e8a317" />
+              </linearGradient>
+            </defs>
+            <path
+              fill="url(#g)"
+              d="M32 4 38.2 25.8 60 32 38.2 38.2 32 60 25.8 38.2 4 32 25.8 25.8Z"
+            />
+            <path fill="#e8a317" d="M48 38 50.2 45.8 58 48 50.2 50.2 48 58 45.8 50.2 38 48 45.8 45.8Z" />
+          </svg>
+          Promptly
+        </a>
+        <div class="nav__links">
+          <a href="/#how">How it works</a>
+          <a href="/#pricing">Pricing</a>
+          <a href="/support">Support</a>
+          <a class="btn btn--primary" id="nav-install" href="#install">Get for Chrome</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero wrap">
+        <div class="hero__visual" aria-hidden="true"></div>
+        <h1 class="hero__brand">
+          Promptly
+          <span>AI Browser Assistant</span>
+        </h1>
+        <p class="hero__lead">
+          Ask AI about any text, image, or webpage directly from Chrome's side panel.
+        </p>
+        <div class="btn-row" style="animation: rise 0.8s 0.14s cubic-bezier(0.22, 1, 0.36, 1) both">
+          <a class="btn btn--primary" id="hero-install" href="#install">Add to Chrome — Free</a>
+          <a class="btn btn--ghost" href="/support">Get support</a>
+        </div>
+      </section>
+
+      <section class="section wrap" id="how">
+        <h2 class="section__title">Three steps. Stay in the tab.</h2>
+        <p class="section__sub">
+          Highlight text, right-click an image, or ask about the whole page — answers without
+          switching apps.
+        </p>
+        <div class="steps">
+          <article class="step">
+            <h3>Select</h3>
+            <p>Text, an image, or the current page — whatever you need help with.</p>
+          </article>
+          <article class="step">
+            <h3>Ask Promptly</h3>
+            <p>Use the context menu or side panel. GPT and Claude families built in.</p>
+          </article>
+          <article class="step">
+            <h3>Keep browsing</h3>
+            <p>Chat stays beside the page so you never lose your place.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section wrap" id="pricing">
+        <h2 class="section__title">Simple plans</h2>
+        <p class="section__sub">Start free. Upgrade when you need more room to think.</p>
+        <div class="plans">
+          <article class="plan">
+            <h3>Free</h3>
+            <p class="price muted">$0</p>
+            <ul>
+              <li>10 AI requests / day</li>
+              <li>2 image analyses / day</li>
+              <li>Side panel chat &amp; quick actions</li>
+            </ul>
+          </article>
+          <article class="plan plan--pro">
+            <h3>Pro</h3>
+            <p class="price muted">$9.99 / month</p>
+            <ul>
+              <li>1000 tokens / week</li>
+              <li>GPT &amp; Claude model families</li>
+              <li>Custom AI actions &amp; fuller history</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__row">
+        <span>© <span id="y"></span> Promptly</span>
+        <nav aria-label="Footer">
+          <a href="/support">Support</a>
+          <a href="/privacy">Privacy</a>
+          <a id="footer-install" href="#install">Chrome Web Store</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('y').textContent = new Date().getFullYear();
+      // After publish, set your real Chrome Web Store URL here:
+      const CHROME_STORE_URL =
+        'https://chromewebstore.google.com/detail/promptly-ai-browser-assistant';
+      for (const id of ['nav-install', 'hero-install', 'footer-install']) {
+        const el = document.getElementById(id);
+        if (el) el.href = CHROME_STORE_URL;
+      }
+    </script>
+  </body>
+</html>
