@@ -11,6 +11,18 @@
     return location.origin;
   }
 
+  /** Always return to the public site, never a stale localhost from the Supabase dashboard. */
+  function redirectTarget() {
+    const next = new URLSearchParams(location.search).get('next') || '/account';
+    const path = next.startsWith('/') && !next.startsWith('//') ? next : '/account';
+    const url = new URL(path, siteOrigin() + '/');
+    const install = getInstallId();
+    if (install && !url.searchParams.get('install')) {
+      url.searchParams.set('install', install);
+    }
+    return url.toString();
+  }
+
   function isUuidLike(value) {
     return /^[a-zA-Z0-9_-]{8,64}$/.test(value);
   }
@@ -164,11 +176,12 @@
   async function signInGoogle() {
     const sb = getClient();
     if (!sb) throw new Error('Supabase is not configured');
-    const next = new URLSearchParams(location.search).get('next') || '/account';
-    const redirectTo = siteOrigin() + (next.startsWith('/') ? next : '/account');
     const { error } = await sb.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo },
+      options: {
+        redirectTo: redirectTarget(),
+        queryParams: { prompt: 'select_account' },
+      },
     });
     if (error) throw error;
   }
@@ -181,11 +194,10 @@
 
   async function signUpEmail(email, password) {
     const sb = getClient();
-    const next = new URLSearchParams(location.search).get('next') || '/account';
     const { data, error } = await sb.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: siteOrigin() + (next.startsWith('/') ? next : '/account') },
+      options: { emailRedirectTo: redirectTarget() },
     });
     if (error) throw error;
     return data;
@@ -226,6 +238,7 @@
     },
     captureInstallParam,
     getInstallId,
+    redirectTarget,
     linkInstallation,
     startProCheckout,
     loadAccount,

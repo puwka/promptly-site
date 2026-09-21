@@ -21,7 +21,7 @@ window.PROMPTLY_CONFIG = {
 
   /** Chrome Web Store listing */
   chromeStoreUrl:
-    'https://chromewebstore.google.com/detail/promptly-ai-browser-assistant',
+    'https://chromewebstore.google.com/detail/promptly-%E2%80%94-ai-browser-ass/hjfcilbkngmdpompmjdigendhldfjlcp',
 
   /**
    * RollyPay (or other) checkout URL.
