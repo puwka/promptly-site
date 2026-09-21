@@ -29,6 +29,7 @@
         <nav class="docs-toc" aria-label="Documentation">
           <a href="#install">Installation</a>
           <a href="#features">Main features</a>
+          <a href="#account">Account</a>
           <a href="#faq">FAQ</a>
           <a href="#troubleshooting">Troubleshooting</a>
         </nav>
@@ -38,6 +39,8 @@
             <h2>Installation</h2>
             <ol class="steps-list">
               <li>Open the Promptly listing on the Chrome Web Store.</li>
+              <li>After install, Promptly opens this site. Sign in with Google or email. If you are already signed in, the extension links automatically.</li>
+              <li>Choose Upgrade to Pro in the extension to open Pricing. Get Pro starts RollyPay checkout for that browser install.</li>
               <li>Click <strong>Add to Chrome</strong> and confirm the permissions.</li>
               <li>Pin Promptly from the extensions menu for quick access.</li>
               <li>Open the side panel from the Promptly icon or the page context menu.</li>
@@ -59,6 +62,19 @@
               <li><strong>Memory</strong> — keep useful context across related asks.</li>
               <li><strong>Models</strong> — choose among supported AI model families.</li>
             </ul>
+          </section>
+
+          <section class="panel" id="account">
+            <h2>Account</h2>
+            <p>
+              Sign in at <a href="/login">/login</a>. Promptly links the signed-in email to this browser’s
+              installation id. <a href="/account">/account</a> shows the email, Free or Pro, subscription
+              status, the next billing date, and Manage subscription.
+            </p>
+            <p>
+              Chat transcripts, document text, page contents, and images are not saved in the account.
+              Pro status comes from the confirmed RollyPay payment, not from a flag stored only in Chrome.
+            </p>
           </section>
 
           <section class="panel" id="faq">
@@ -118,7 +134,9 @@
     </main>
 
     <footer class="footer" data-site-footer></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./config.js"></script>
+    <script src="./auth.js"></script>
     <script src="./site.js"></script>
   </body>
 </html>

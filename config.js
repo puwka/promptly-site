@@ -7,8 +7,8 @@ window.PROMPTLY_CONFIG = {
   productName: 'Promptly',
   tagline: 'AI Browser Assistant',
 
-  /** Public site URL (no trailing slash), e.g. https://promptly.app */
-  siteUrl: 'https://YOUR_DOMAIN.com',
+  /** Public site URL (no trailing slash) */
+  siteUrl: 'https://promptly-site-ten.vercel.app',
 
   /** Legal / business identity — replace before go-live */
   companyName: 'Promptly',
@@ -32,6 +32,14 @@ window.PROMPTLY_CONFIG = {
 
   /** Display name of the payment provider on legal / checkout pages */
   paymentProvider: 'RollyPay',
+
+  /**
+   * Public Supabase client config. The anon key is safe in the browser.
+   * Never put the service role key here.
+   */
+  supabaseUrl: 'https://dagfxkbqvmgegwlynsla.supabase.co',
+  supabaseAnonKey:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRhZ2Z4a2Jxdm1nZWd3bHluc2xhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3NDM3ODQsImV4cCI6MjEwNTMxOTc4NH0.Dg-qNcnlZYwSW33dF_p7Gx_5TIYu32d2cVNbbmtIbiY',
 
   /** Pro plan */
   plan: {

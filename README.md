@@ -46,6 +46,22 @@ Any static server, for example:
 npx serve .
 ```
 
+## Account
+
+Sign in on the site (`/login`) with Google or email. Installing Promptly opens the site with this browser’s installation id. If you are already signed in, the install links without another prompt.
+
+Upgrade to Pro in the extension opens `/pricing`. Get Pro starts a RollyPay checkout tied to that installation. After the webhook confirms payment, the extension reads Pro from Supabase.
+
+The anon key in `config.js` is public. Do not add the Supabase service role key to the site or the extension.
+
+In the Supabase dashboard, add these redirect URLs:
+
+- `https://promptly-site-ten.vercel.app/account`
+- `https://promptly-site-ten.vercel.app/pricing`
+- `http://localhost:4173/account` for local preview
+
+Apply migration `supabase/migrations/20260329220000_account_profiles.sql` before using Account.
+
 ## RollyPay
 
 1. Keep **Get Pro** → `/checkout`.

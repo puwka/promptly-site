@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Account — Promptly</title>
+    <meta name="description" content="Your Promptly account, plan, and subscription." />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="/account" />
+    <link rel="icon" href="./favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header" data-site-header></header>
+    <main class="page wrap">
+      <article class="account-card">
+        <h1>Promptly Account</h1>
+        <dl class="account-list">
+          <div>
+            <dt>Email</dt>
+            <dd data-field="email">—</dd>
+          </div>
+          <div>
+            <dt>Current plan</dt>
+            <dd data-field="plan">Free</dd>
+          </div>
+          <div>
+            <dt>Subscription status</dt>
+            <dd data-field="status">Inactive</dd>
+          </div>
+          <div>
+            <dt>Next billing date</dt>
+            <dd data-field="renews">—</dd>
+          </div>
+          <div>
+            <dt>Extension</dt>
+            <dd data-field="linked">Not linked yet</dd>
+          </div>
+        </dl>
+        <form class="form" data-profile-form>
+          <div class="form-row">
+            <label for="display-name">Profile name</label>
+            <input id="display-name" name="displayName" type="text" maxlength="80" autocomplete="name" />
+          </div>
+          <button class="btn btn--ghost" type="submit">Save profile</button>
+        </form>
+        <div class="btn-row">
+          <button class="btn btn--primary" type="button" data-manage>Manage subscription</button>
+          <a class="btn btn--ghost" href="/pricing">Get Pro</a>
+          <button class="btn btn--ghost" type="button" data-signout>Sign out</button>
+        </div>
+        <p class="form-hint" data-account-note>
+          Chat history, documents, and images stay in the extension. This page only shows your account and plan.
+        </p>
+      </article>
+    </main>
+    <footer class="footer" data-site-footer></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./config.js"></script>
+    <script src="./auth.js"></script>
+    <script src="./site.js"></script>
+    <script>
+      function setField(name, value) {
+        const node = document.querySelector('[data-field="' + name + '"]');
+        if (node) node.textContent = value;
+      }
+
+      window.PromptlyAuth.ready.then(async () => {
+        if (!window.PromptlyAuth.getSession()) {
+          location.replace('/login?next=/account');
+          return;
+        }
+        const snap = await window.PromptlyAuth.loadAccount();
+        if (!snap?.ok) {
+          const note = document.querySelector('[data-account-note]');
+          if (note) note.textContent = snap?.message || 'Could not load the account. Apply the latest Supabase migration, then refresh.';
+          return;
+        }
+        setField('email', snap.email || '—');
+        setField('plan', snap.plan === 'pro' || snap.plan === 'team' ? 'Pro' : 'Free');
+        setField('status', snap.status === 'active' ? 'Active' : snap.status === 'canceling' ? 'Cancels at period end' : 'Inactive');
+        setField(
+          'renews',
+          snap.current_period_end
+            ? new Date(snap.current_period_end).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
+            : '—',
+        );
+        setField('linked', snap.linked ? 'Linked to this browser' : 'Open Promptly and choose Upgrade so we can link this install');
+        const name = document.querySelector('#display-name');
+        if (name && snap.display_name) name.value = snap.display_name;
+      });
+
+      document.querySelector('[data-profile-form]')?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const name = document.querySelector('#display-name')?.value || '';
+        const result = await window.PromptlyAuth.saveDisplayName(name);
+        const note = document.querySelector('[data-account-note]');
+        if (note) note.textContent = result?.ok ? 'Profile saved.' : result?.message || 'Could not save profile.';
+      });
+      document.querySelector('[data-manage]')?.addEventListener('click', () => {
+        void window.PromptlyAuth.manageSubscription();
+      });
+      document.querySelector('[data-signout]')?.addEventListener('click', () => {
+        void window.PromptlyAuth.signOut();
+      });
+    </script>
+  </body>
+</html>

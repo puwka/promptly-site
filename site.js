@@ -62,7 +62,7 @@
             ${navLink('/documentation', 'Docs')}
             ${navLink('/support', 'Support')}
             <a class="btn btn--ghost btn--sm" href="${chromeUrl}" data-cfg-href="chromeStoreUrl">Add to Chrome</a>
-            <a class="btn btn--primary btn--sm" href="/pricing">Get Pro</a>
+            <span data-auth-slot></span>
           </div>
         </nav>
       </div>
@@ -102,8 +102,8 @@
           <div>
             <h3>Help</h3>
             <a href="/support">Support</a>
+            <a href="/account">Account</a>
             <a href="/documentation#faq">FAQ</a>
-            <a href="/checkout">Checkout</a>
           </div>
           <div>
             <h3>Legal</h3>
@@ -210,6 +210,54 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  function paintAuthSlot(user) {
+    document.querySelectorAll('[data-auth-slot]').forEach((slot) => {
+      if (user?.email) {
+        slot.innerHTML =
+          '<a class="btn btn--primary btn--sm" href="/account">Account</a>';
+      } else {
+        slot.innerHTML =
+          '<a class="btn btn--ghost btn--sm" href="/login">Sign in</a>' +
+          '<a class="btn btn--primary btn--sm" href="/pricing">Get Pro</a>';
+      }
+    });
+  }
+
+  function wireAuth() {
+    const auth = window.PromptlyAuth;
+    if (!auth) return;
+    auth.onChange((session) => paintAuthSlot(session?.user));
+  }
+
+  function wireGetPro() {
+    const button = document.querySelector('[data-get-pro]');
+    if (!button || !window.PromptlyAuth) return;
+    const note = document.querySelector('[data-checkout-note]');
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      const result = await window.PromptlyAuth.startProCheckout();
+      if (!result?.ok && note) {
+        note.textContent = result?.message || 'Sign in to continue to checkout.';
+        note.classList.add('is-warn');
+      }
+      button.disabled = false;
+    });
+  }
+
+  function wireWelcome() {
+    const params = new URLSearchParams(location.search);
+    if (params.get('welcome') !== '1') return;
+    const hero = document.querySelector('.hero__copy');
+    if (!hero || document.querySelector('[data-link-banner]')) return;
+    const banner = document.createElement('p');
+    banner.className = 'link-banner';
+    banner.setAttribute('data-link-banner', '');
+    banner.textContent = window.PromptlyAuth?.getSession()
+      ? 'Promptly is linked to this browser. Your plan stays in sync with the extension.'
+      : 'Sign in once to connect this Chrome install to your Promptly account.';
+    hero.prepend(banner);
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     renderHeader();
     renderFooter();
@@ -217,32 +265,32 @@
     wireCheckoutButtons();
     wireSupportForm();
     wireHeaderScroll();
+    wireGetPro();
+
+    const boot = window.PromptlyAuth?.ready;
+    const afterAuth = () => {
+      wireAuth();
+      wireWelcome();
+    };
+    if (boot && typeof boot.then === 'function') boot.then(afterAuth);
+    else afterAuth();
 
     const payBtn = document.querySelector('[data-pay-now]');
     if (payBtn) {
-      const external = text(cfg.checkoutUrl, '');
       const status = document.querySelector('[data-checkout-status]');
-      if (external && /^https?:\/\//i.test(external)) {
-        payBtn.setAttribute('href', external);
-        payBtn.setAttribute('rel', 'noopener noreferrer');
+      payBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (!window.PromptlyAuth) return;
         if (status) {
-          status.textContent = `You will continue to ${text(cfg.paymentProvider, 'the payment provider')} to complete your purchase.`;
+          status.textContent = 'Opening secure checkout…';
+          status.classList.remove('is-warn');
         }
-      } else {
-        payBtn.setAttribute('href', '#');
-        payBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (status) {
-            status.textContent =
-              'Checkout URL is not configured yet. Set checkoutUrl in config.js to your RollyPay payment link.';
-            status.classList.add('is-warn');
-          }
-        });
-        if (status) {
-          status.textContent =
-            'Payment link pending. Configure checkoutUrl in config.js when RollyPay is ready.';
+        const result = await window.PromptlyAuth.startProCheckout();
+        if (!result?.ok && status) {
+          status.textContent = result?.message || 'Sign in, then try again.';
+          status.classList.add('is-warn');
         }
-      }
+      });
     }
   });
 })();

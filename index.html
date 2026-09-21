@@ -47,12 +47,13 @@
       <section class="hero wrap">
         <div class="hero__grid">
           <div class="hero__copy">
+            <p class="hero__kicker">Chrome side panel</p>
             <h1 class="hero__brand">
               Promptly
-              <span>AI Browser Assistant</span>
+              <span>The assistant that stays beside the page.</span>
             </h1>
             <p class="hero__lead">
-              AI chat and tools in Chrome’s side panel — for text, images, files, and the page you’re on.
+              Rewrite a selection, read a PDF, question an image, or edit Google Docs and Sheets — without leaving the tab.
             </p>
             <div class="btn-row">
               <a class="btn btn--primary" href="/pricing">Get Pro — $10/month</a>
@@ -207,6 +208,44 @@
         </div>
       </section>
 
+      <section class="section wrap" id="surfaces">
+        <div class="section__head">
+          <h2 class="section__title">One panel, four kinds of work</h2>
+          <p class="section__sub">The same side panel, pointed at whatever is in the tab.</p>
+        </div>
+        <div class="surfaces">
+          <article class="surface">
+            <h3>Text</h3>
+            <div class="surface__page">
+              <p>Selected paragraph stays highlighted while Promptly rewrites it in the panel.</p>
+              <span>Selection</span>
+            </div>
+          </article>
+          <article class="surface">
+            <h3>Images</h3>
+            <div class="surface__shot">
+              <div class="surface__frame"></div>
+              <p>Ask what is in the picture. The image never leaves the tab for storage.</p>
+            </div>
+          </article>
+          <article class="surface">
+            <h3>PDF</h3>
+            <div class="surface__doc">
+              <strong>brief.pdf</strong>
+              <span>12 pages · attached locally</span>
+            </div>
+          </article>
+          <article class="surface">
+            <h3>Google Workspace</h3>
+            <div class="surface__sheet">
+              <div></div><div></div><div></div>
+              <div></div><div></div><div></div>
+            </div>
+            <p>Docs, Sheets, Slides, and Forms — propose an edit, then apply it in the document.</p>
+          </article>
+        </div>
+      </section>
+
       <section class="wrap">
         <div class="cta-band">
           <div>
@@ -222,7 +261,9 @@
     </main>
 
     <footer class="footer" data-site-footer></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./config.js"></script>
+    <script src="./auth.js"></script>
     <script src="./site.js"></script>
   </body>
 </html>

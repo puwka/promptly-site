@@ -53,6 +53,11 @@
           (<span data-cfg="paymentProvider">RollyPay</span>). We do not store full card numbers on
           Promptly servers.
         </li>
+        <li>
+          <strong>Not stored in your account</strong> — AI chat history, prompts, document text,
+          webpage contents, and images stay in the Chrome extension on your device. The account
+          stores identity, plan, billing identifiers, settings, and usage counters only.
+        </li>
       </ul>
 
       <h2>How we use information</h2>
@@ -112,7 +117,9 @@
     </main>
 
     <footer class="footer" data-site-footer></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./config.js"></script>
+    <script src="./auth.js"></script>
     <script src="./site.js"></script>
   </body>
 </html>
