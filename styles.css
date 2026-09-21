@@ -1299,15 +1299,28 @@ code {
   align-items: center;
 }
 
-.auth-card,
-.account-card {
+.auth-card {
   max-width: 26.5rem;
+  margin: 1.5rem auto 2.5rem;
+  padding: 1.6rem 1.45rem 1.45rem;
+  text-align: left;
+}
+
+.account-card {
+  max-width: 32rem;
   margin: 1.5rem auto 2.5rem;
   padding: 1.6rem 1.45rem 1.45rem;
 }
 
-.auth-card {
-  text-align: left;
+.account-actions {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.9rem;
+}
+
+.account-actions .btn,
+.account-card .form > .btn {
+  width: 100%;
 }
 
 .auth-card h1 {
