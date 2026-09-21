@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Privacy Policy — Promptly</title>
     <meta name="description" content="Privacy Policy for Promptly AI Browser Assistant." />
+    <link rel="canonical" href="/privacy" />
     <link rel="icon" href="./favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,126 +16,103 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="wrap">
-      <nav class="nav" aria-label="Primary">
-        <a class="brand" href="/">
-          <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="g" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#1f6bff" />
-                <stop offset="0.55" stop-color="#4d9cff" />
-                <stop offset="1" stop-color="#e8a317" />
-              </linearGradient>
-            </defs>
-            <path
-              fill="url(#g)"
-              d="M32 4 38.2 25.8 60 32 38.2 38.2 32 60 25.8 38.2 4 32 25.8 25.8Z"
-            />
-            <path fill="#e8a317" d="M48 38 50.2 45.8 58 48 50.2 50.2 48 58 45.8 50.2 38 48 45.8 45.8Z" />
-          </svg>
-          Promptly
-        </a>
-        <div class="nav__links">
-          <a href="/">Product</a>
-          <a href="/support">Support</a>
-        </div>
-      </nav>
-    </header>
+    <header class="site-header" data-site-header></header>
 
     <main class="page wrap prose">
       <h1>Privacy Policy</h1>
-      <p class="lede">Last updated: September 19, 2026</p>
+      <p class="lede">Last updated: <span data-policies-updated>September 21, 2026</span></p>
 
       <p>
-        Promptly (“we”, “the extension”) is an AI Chrome extension that helps you ask questions about
-        selected text, images, and web pages.
+        This Privacy Policy explains how Promptly (“Promptly”, “we”, “us”) handles information when you
+        use the Promptly Chrome extension and this website.
+      </p>
+      <p>
+        Operator:
+        <strong data-cfg="companyName">[COMPANY_LEGAL_NAME]</strong>,
+        <span data-cfg="companyAddress">[COMPANY_ADDRESS]</span>,
+        <span data-cfg="country">[COUNTRY]</span>.
       </p>
 
-      <h2>What we collect</h2>
+      <h2>Information we process</h2>
       <p>Depending on how you use Promptly, we may process:</p>
       <ul>
         <li>
-          <strong>Installation id</strong> — a random local id used for Free/Pro usage limits.
+          <strong>Account and contact details</strong> — such as an email address you provide for
+          support, billing restoration, or subscription management.
         </li>
         <li>
-          <strong>Chrome profile email</strong> (optional) — to restore a paid subscription after
-          reinstall and sync settings / history / custom actions. Not used for advertising.
+          <strong>Usage and technical data</strong> — extension version, approximate usage events,
+          error diagnostics, and similar product metrics needed to operate the service.
         </li>
         <li>
-          <strong>AI request payload</strong> — text, page excerpt, or image you choose to send,
-          transmitted to our backend to generate an answer.
+          <strong>Content you choose to send to AI</strong> — selected text, page excerpts, images,
+          files, or prompts you submit for processing.
         </li>
         <li>
-          <strong>AI request metadata</strong> — model name, context type, usage counts, timestamps.
-          Analytics do not store full prompts, full page HTML, or images.
-        </li>
-        <li>
-          <strong>Usage counters</strong> — Free daily limits and Pro weekly token limits.
-        </li>
-        <li>
-          <strong>Synced workspace data</strong> — when a Chrome profile email is available,
-          settings, custom actions, and conversations may sync so they survive reinstall.
-        </li>
-        <li>
-          <strong>Billing identifiers</strong> — Stripe customer / subscription ids for Promptly Pro.
-        </li>
-        <li>
-          <strong>Product analytics</strong> — aggregate events such as install or paywall viewed
-          (no prompt text, page content, cookies, or API keys).
+          <strong>Payment-related identifiers</strong> — handled by our payment provider
+          (<span data-cfg="paymentProvider">RollyPay</span>). We do not store full card numbers on
+          Promptly servers.
         </li>
       </ul>
 
-      <h2>How AI requests work</h2>
+      <h2>How we use information</h2>
+      <ul>
+        <li>To provide AI responses and product features you request</li>
+        <li>To operate subscriptions, billing, and customer support</li>
+        <li>To maintain security, prevent abuse, and improve reliability</li>
+        <li>To comply with applicable legal obligations</li>
+      </ul>
+
+      <h2>AI processing</h2>
       <p>
-        Selected text / page excerpt / image is sent to our backend (Supabase Edge Function), which
-        calls NeuroAPI. Provider keys stay on the server and never ship inside the extension package.
+        When you submit a request, the content needed to answer may be transmitted to our backend and
+        to AI model providers that power Promptly. Do not submit information you are not allowed to
+        share.
       </p>
 
       <h2>Payments</h2>
       <p>
-        Paid plans are processed by Stripe. Card details are entered on Stripe Checkout / Customer
-        Portal and are not stored by Promptly.
+        Paid plans are processed by <span data-cfg="paymentProvider">RollyPay</span>. Card details are
+        entered on the payment provider’s checkout and are subject to that provider’s privacy terms.
       </p>
 
-      <h2>Cookies &amp; tracking</h2>
+      <h2>Cookies and this website</h2>
       <p>
-        The extension does not use third-party advertising cookies. Analytics are first-party product
-        events stored in our Supabase project.
+        This marketing site is primarily static. If analytics or payment scripts are added later, we
+        will update this policy to describe them.
       </p>
 
-      <h2>Data sharing</h2>
-      <p>We do not sell personal data. Subprocessors:</p>
-      <ul>
-        <li><strong>Supabase</strong> — database, Edge Functions, optional sync storage</li>
-        <li><strong>NeuroAPI</strong> — AI model inference</li>
-        <li><strong>Stripe</strong> — subscription payments</li>
-      </ul>
+      <h2>Sharing</h2>
+      <p>
+        We do not sell personal information. We may share data with service providers that help us
+        host, process AI requests, take payments, or provide support — only as needed to operate
+        Promptly.
+      </p>
+
+      <h2>Retention</h2>
+      <p>
+        We retain information only as long as needed for the purposes above, including legal,
+        accounting, and dispute-resolution requirements.
+      </p>
 
       <h2>Your choices</h2>
       <ul>
-        <li>Turn off or clear chat history in Settings.</li>
-        <li>Manage or cancel Pro via Settings → Manage subscription.</li>
-        <li>Uninstall the extension to stop local processing and new sync.</li>
+        <li>Control what content you send to Promptly</li>
+        <li>Contact us to request access, correction, or deletion where applicable</li>
+        <li>Uninstall the extension to stop local use</li>
       </ul>
 
       <h2>Contact</h2>
       <p>
-        Questions:
-        <a href="mailto:infopromptly@gmail.com">infopromptly@gmail.com</a>
+        Privacy questions:
+        <a data-cfg-mail="legalEmail" href="#">[LEGAL_EMAIL]</a>
+        or
+        <a data-cfg-mail="supportEmail" href="#">[SUPPORT_EMAIL]</a>.
       </p>
     </main>
 
-    <footer class="footer">
-      <div class="wrap footer__row">
-        <span>© <span id="y"></span> Promptly</span>
-        <nav aria-label="Footer">
-          <a href="/">Home</a>
-          <a href="/support">Support</a>
-        </nav>
-      </div>
-    </footer>
-    <script>
-      document.getElementById('y').textContent = new Date().getFullYear();
-    </script>
+    <footer class="footer" data-site-footer></footer>
+    <script src="./config.js"></script>
+    <script src="./site.js"></script>
   </body>
 </html>

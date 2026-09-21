@@ -6,8 +6,16 @@
     <title>Promptly — AI Browser Assistant</title>
     <meta
       name="description"
-      content="Ask AI about any text, image, or webpage directly from Chrome's side panel."
+      content="Promptly is an AI browser assistant for Chrome: chat, text tools, image analysis, PDF and files, Google Docs, AI Search, Memory, and multiple models."
     />
+    <meta name="theme-color" content="#f6f7fb" />
+    <link rel="canonical" href="/" />
+    <meta property="og:title" content="Promptly — AI Browser Assistant" />
+    <meta
+      property="og:description"
+      content="AI chat and tools in your Chrome side panel — text, images, PDFs, Docs, search, and memory."
+    />
+    <meta property="og:type" content="website" />
     <link rel="icon" href="./favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,120 +24,205 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Promptly",
+        "applicationCategory": "BrowserApplication",
+        "operatingSystem": "Chrome",
+        "description": "AI Browser Assistant for Chrome.",
+        "offers": {
+          "@type": "Offer",
+          "price": "10.00",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
   </head>
   <body>
-    <header class="wrap">
-      <nav class="nav" aria-label="Primary">
-        <a class="brand" href="/">
-          <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="g" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#1f6bff" />
-                <stop offset="0.55" stop-color="#4d9cff" />
-                <stop offset="1" stop-color="#e8a317" />
-              </linearGradient>
-            </defs>
-            <path
-              fill="url(#g)"
-              d="M32 4 38.2 25.8 60 32 38.2 38.2 32 60 25.8 38.2 4 32 25.8 25.8Z"
-            />
-            <path fill="#e8a317" d="M48 38 50.2 45.8 58 48 50.2 50.2 48 58 45.8 50.2 38 48 45.8 45.8Z" />
-          </svg>
-          Promptly
-        </a>
-        <div class="nav__links">
-          <a href="/#how">How it works</a>
-          <a href="/#pricing">Pricing</a>
-          <a href="/support">Support</a>
-          <a class="btn btn--primary" id="nav-install" href="#install">Get for Chrome</a>
-        </div>
-      </nav>
-    </header>
+    <header class="site-header" data-site-header></header>
 
     <main>
       <section class="hero wrap">
-        <div class="hero__visual" aria-hidden="true"></div>
-        <h1 class="hero__brand">
-          Promptly
-          <span>AI Browser Assistant</span>
-        </h1>
-        <p class="hero__lead">
-          Ask AI about any text, image, or webpage directly from Chrome's side panel.
-        </p>
-        <div class="btn-row" style="animation: rise 0.8s 0.14s cubic-bezier(0.22, 1, 0.36, 1) both">
-          <a class="btn btn--primary" id="hero-install" href="#install">Add to Chrome — Free</a>
-          <a class="btn btn--ghost" href="/support">Get support</a>
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <h1 class="hero__brand">
+              Promptly
+              <span>AI Browser Assistant</span>
+            </h1>
+            <p class="hero__lead">
+              AI chat and tools in Chrome’s side panel — for text, images, files, and the page you’re on.
+            </p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="/pricing">Get Pro — $10/month</a>
+              <a class="btn btn--ghost" data-cfg-href="chromeStoreUrl" href="#">Add to Chrome</a>
+            </div>
+          </div>
+
+          <div class="hero__stage" aria-hidden="true">
+            <div class="mock mock--panel">
+              <div class="mock__chrome">
+                <div class="mock__dots"><i></i><i></i><i></i></div>
+                <div class="mock__title">Promptly</div>
+              </div>
+              <div class="mock__body">
+                <div class="mock__bubble mock__bubble--user">Summarize the selected paragraph and keep the key claims.</div>
+                <div class="mock__bubble mock__bubble--ai">
+                  Three claims stand out: the timeline, the cost drivers, and the open risks. Want a shorter version for email?
+                  <div class="mock__meta">
+                    <span class="mock__chip">Side panel</span>
+                    <span class="mock__chip">GPT / Claude</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mock__input">
+                <span>Ask about this page…</span>
+                <button class="mock__send" type="button" tabindex="-1">→</button>
+              </div>
+            </div>
+            <aside class="mock-float">
+              <h4>Context stays open</h4>
+              <p>Chat beside the tab — no copy-paste into another app.</p>
+            </aside>
+          </div>
         </div>
       </section>
 
-      <section class="section wrap" id="how">
-        <h2 class="section__title">Three steps. Stay in the tab.</h2>
-        <p class="section__sub">
-          Highlight text, right-click an image, or ask about the whole page — answers without
-          switching apps.
-        </p>
-        <div class="steps">
-          <article class="step">
-            <h3>Select</h3>
-            <p>Text, an image, or the current page — whatever you need help with.</p>
+      <section class="section wrap" id="features">
+        <div class="section__head">
+          <h2 class="section__title">What Promptly does</h2>
+          <p class="section__sub">Core capabilities in the browser — no extra apps.</p>
+        </div>
+        <div class="features">
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+            </div>
+            <h3>AI chat in the browser</h3>
+            <p>Talk to AI from Chrome’s side panel while you browse.</p>
           </article>
-          <article class="step">
-            <h3>Ask Promptly</h3>
-            <p>Use the context menu or side panel. GPT and Claude families built in.</p>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h10M4 17h14"/></svg>
+            </div>
+            <h3>Work with text</h3>
+            <p>Rewrite, summarize, and ask about selected text on any page.</p>
           </article>
-          <article class="step">
-            <h3>Keep browsing</h3>
-            <p>Chat stays beside the page so you never lose your place.</p>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="m21 16-4.5-4.5L8 20"/></svg>
+            </div>
+            <h3>Analyze images</h3>
+            <p>Describe, extract, or question images you open in the tab.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>
+            </div>
+            <h3>PDF &amp; files</h3>
+            <p>Work with PDFs and files without leaving Chrome.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
+            </div>
+            <h3>Google Docs</h3>
+            <p>Use Promptly while editing documents in Google Docs.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            </div>
+            <h3>AI Search</h3>
+            <p>Search and ask across context with AI assistance.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 8h14M7 16h10"/></svg>
+            </div>
+            <h3>Memory</h3>
+            <p>Keep useful context so follow-ups stay coherent.</p>
+          </article>
+          <article class="feature">
+            <div class="feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10H7z"/><path d="M4 4h4v4H4zM16 4h4v4h-4zM4 16h4v4H4zM16 16h4v4h-4z"/></svg>
+            </div>
+            <h3>Multiple AI models</h3>
+            <p>Choose among supported AI model families for the task.</p>
           </article>
         </div>
       </section>
 
-      <section class="section wrap" id="pricing">
-        <h2 class="section__title">Simple plans</h2>
-        <p class="section__sub">Start free. Upgrade when you need more room to think.</p>
-        <div class="plans">
-          <article class="plan">
-            <h3>Free</h3>
-            <p class="price muted">$0</p>
-            <ul>
-              <li>10 AI requests / day</li>
-              <li>2 image analyses / day</li>
-              <li>Side panel chat &amp; quick actions</li>
-            </ul>
-          </article>
-          <article class="plan plan--pro">
-            <h3>Pro</h3>
-            <p class="price muted">$9.99 / month</p>
-            <ul>
-              <li>1000 tokens / week</li>
-              <li>GPT &amp; Claude model families</li>
-              <li>Custom AI actions &amp; fuller history</li>
-            </ul>
-          </article>
+      <section class="section wrap" id="screenshots">
+        <div class="section__head">
+          <h2 class="section__title">In the side panel</h2>
+          <p class="section__sub">A focused workspace next to the page — chat, context, and model choice.</p>
+        </div>
+        <div class="showcase">
+          <div class="shot shot--tall">
+            <h3>AI chat beside the page</h3>
+            <div class="mock mock--panel">
+              <div class="mock__chrome">
+                <div class="mock__dots"><i></i><i></i><i></i></div>
+                <div class="mock__title">Chat</div>
+              </div>
+              <div class="mock__body">
+                <div class="mock__bubble mock__bubble--user">Explain this chart for a non-technical reader.</div>
+                <div class="mock__bubble mock__bubble--ai">
+                  The chart compares monthly usage. Peak is mid-quarter; the dip aligns with the outage window you highlighted.
+                </div>
+                <div class="mock__bubble mock__bubble--user">Turn that into three bullets for Slack.</div>
+              </div>
+              <div class="mock__input">
+                <span>Follow up…</span>
+                <button class="mock__send" type="button" tabindex="-1">→</button>
+              </div>
+            </div>
+          </div>
+          <div class="shot-stack">
+            <div class="shot">
+              <h3>Files &amp; Docs</h3>
+              <div class="mini-ui">
+                <div class="mini-ui__bar">Sources</div>
+                <div class="mini-ui__rows">
+                  <div class="mini-ui__row"><strong>brief.pdf</strong><span>PDF</span></div>
+                  <div class="mini-ui__row"><strong>Q3 roadmap</strong><span>Docs</span></div>
+                  <div class="mini-ui__row"><strong>Selected text</strong><span>Page</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="shot">
+              <h3>Models &amp; Memory</h3>
+              <div class="mini-ui">
+                <div class="mini-ui__bar">Preferences</div>
+                <div class="mini-ui__rows">
+                  <div class="mini-ui__row"><strong>Model family</strong><span>Selectable</span></div>
+                  <div class="mini-ui__row"><strong>Memory</strong><span>On</span></div>
+                  <div class="mini-ui__row"><strong>AI Search</strong><span>Ready</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap">
+        <div class="cta-band">
+          <div>
+            <h2>Promptly Pro</h2>
+            <p><span data-plan="priceDisplay">$10/month</span> — full access to Promptly’s Pro plan.</p>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="/pricing">View pricing</a>
+            <a class="btn btn--ghost" href="/documentation">Documentation</a>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="wrap footer__row">
-        <span>© <span id="y"></span> Promptly</span>
-        <nav aria-label="Footer">
-          <a href="/support">Support</a>
-          <a href="/privacy">Privacy</a>
-          <a id="footer-install" href="#install">Chrome Web Store</a>
-        </nav>
-      </div>
-    </footer>
-
-    <script>
-      document.getElementById('y').textContent = new Date().getFullYear();
-      // After publish, set your real Chrome Web Store URL here:
-      const CHROME_STORE_URL =
-        'https://chromewebstore.google.com/detail/promptly-ai-browser-assistant';
-      for (const id of ['nav-install', 'hero-install', 'footer-install']) {
-        const el = document.getElementById(id);
-        if (el) el.href = CHROME_STORE_URL;
-      }
-    </script>
+    <footer class="footer" data-site-footer></footer>
+    <script src="./config.js"></script>
+    <script src="./site.js"></script>
   </body>
 </html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pricing — Promptly Pro</title>
+    <meta
+      name="description"
+      content="Promptly Pro is $10/month. Get Pro access to the AI Browser Assistant for Chrome."
+    />
+    <link rel="canonical" href="/pricing" />
+    <link rel="icon" href="./favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header" data-site-header></header>
+
+    <main class="page wrap">
+      <h1>Pricing</h1>
+      <p class="lede">One plan. Clear price. Cancel anytime per the Terms and Refund Policy.</p>
+
+      <article class="pricing-solo">
+        <div class="pricing-solo__top">
+          <div>
+            <h2 data-plan="name">Promptly Pro</h2>
+            <p class="form-hint" style="margin-top: 0.35rem">Billed monthly</p>
+          </div>
+          <p class="pricing-solo__price">
+            <span data-plan="priceLabel">$10</span><span>/<span data-plan="period">month</span></span>
+          </p>
+        </div>
+
+        <ul class="pricing-list">
+          <li>AI chat in the Chrome side panel</li>
+          <li>Work with text on any page</li>
+          <li>Image analysis</li>
+          <li>PDF and file support</li>
+          <li>Google Docs support</li>
+          <li>AI Search</li>
+          <li>Memory</li>
+          <li>Multiple AI models</li>
+        </ul>
+
+        <a class="btn btn--primary btn--block" data-checkout href="/checkout">Get Pro</a>
+        <p class="pricing-note">
+          Secure checkout via <span data-cfg="paymentProvider">RollyPay</span>.
+          See <a href="/refund">Refund Policy</a> and <a href="/terms">Terms</a>.
+        </p>
+      </article>
+    </main>
+
+    <footer class="footer" data-site-footer></footer>
+    <script src="./config.js"></script>
+    <script src="./site.js"></script>
+  </body>
+</html>

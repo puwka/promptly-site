@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Checkout — Promptly Pro</title>
+    <meta
+      name="description"
+      content="Checkout for Promptly Pro. Complete your subscription securely."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="/checkout" />
+    <link rel="icon" href="./favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header" data-site-header></header>
+
+    <main class="page wrap">
+      <article class="checkout-card">
+        <h1>Checkout</h1>
+        <p class="lede" style="margin-bottom: 0">Promptly Pro subscription</p>
+
+        <div class="checkout-summary">
+          <div class="checkout-summary__row">
+            <span>Plan</span>
+            <strong data-plan="name">Promptly Pro</strong>
+          </div>
+          <div class="checkout-summary__row">
+            <span>Billing</span>
+            <span>Monthly</span>
+          </div>
+          <div class="checkout-summary__row checkout-summary__total">
+            <span>Total due today</span>
+            <span data-plan="priceDisplay">$10/month</span>
+          </div>
+        </div>
+
+        <a class="btn btn--primary btn--block" data-pay-now href="#">Pay with <span data-cfg="paymentProvider">RollyPay</span></a>
+
+        <p class="checkout-status" data-checkout-status>
+          Payment link pending. Configure checkoutUrl in config.js when RollyPay is ready.
+        </p>
+
+        <p class="pricing-note">
+          By continuing you agree to the
+          <a href="/terms">Terms of Service</a>
+          and
+          <a href="/privacy">Privacy Policy</a>.
+          Refunds follow the
+          <a href="/refund">Refund Policy</a>.
+        </p>
+      </article>
+    </main>
+
+    <footer class="footer" data-site-footer></footer>
+    <script src="./config.js"></script>
+    <script src="./site.js"></script>
+  </body>
+</html>

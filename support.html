@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Support — Promptly</title>
-    <meta name="description" content="Get help with Promptly AI Browser Assistant." />
+    <meta name="description" content="Contact Promptly support and find answers to common questions." />
+    <link rel="canonical" href="/support" />
     <link rel="icon" href="./favicon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,82 +16,85 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="wrap">
-      <nav class="nav" aria-label="Primary">
-        <a class="brand" href="/">
-          <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="g" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#1f6bff" />
-                <stop offset="0.55" stop-color="#4d9cff" />
-                <stop offset="1" stop-color="#e8a317" />
-              </linearGradient>
-            </defs>
-            <path
-              fill="url(#g)"
-              d="M32 4 38.2 25.8 60 32 38.2 38.2 32 60 25.8 38.2 4 32 25.8 25.8Z"
-            />
-            <path fill="#e8a317" d="M48 38 50.2 45.8 58 48 50.2 50.2 48 58 45.8 50.2 38 48 45.8 45.8Z" />
-          </svg>
-          Promptly
-        </a>
-        <div class="nav__links">
-          <a href="/">Product</a>
-          <a href="/privacy">Privacy</a>
-          <a class="btn btn--primary" href="mailto:infopromptly@gmail.com">Email us</a>
-        </div>
-      </nav>
-    </header>
+    <header class="site-header" data-site-header></header>
 
     <main class="page wrap">
       <h1>Support</h1>
       <p class="lede">
-        Something stuck? Write us — we read every message. Include your Chrome version and
-        extension version from <code>chrome://extensions</code>.
+        Tell us what broke. Include your Chrome version and the Promptly version from
+        <code>chrome://extensions</code>.
       </p>
 
-      <div class="panel">
-        <h2>Contact</h2>
-        <p>
-          Email:
-          <a class="mail" href="mailto:infopromptly@gmail.com">infopromptly@gmail.com</a>
-        </p>
-        <p class="muted" style="margin-top: 0.6rem; font-size: 0.92rem">
-          Replace this address in the HTML before go-live if you use a different inbox.
-        </p>
-      </div>
+      <div class="support-layout">
+        <section class="panel">
+          <h2>Contact form</h2>
+          <p class="form-hint" style="margin-bottom: 1rem">
+            Submitting opens your email app with a pre-filled message to our support address.
+          </p>
+          <form class="form" data-support-form>
+            <div class="form-row">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="form-row">
+              <label for="email">Your email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="form-row">
+              <label for="topic">Topic</label>
+              <select id="topic" name="topic">
+                <option>General</option>
+                <option>Installation</option>
+                <option>Billing</option>
+                <option>Bug report</option>
+                <option>Refund request</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required placeholder="What happened? Steps to reproduce help a lot."></textarea>
+            </div>
+            <button class="btn btn--primary" type="submit">Send message</button>
+          </form>
+        </section>
 
-      <div class="panel">
-        <h2>Common fixes</h2>
-        <ul>
-          <li>Refresh the tab after installing or updating Promptly.</li>
-          <li>Confirm you are online — AI requests need network access.</li>
-          <li>If image analysis fails, try again or switch model family (GPT / Claude).</li>
-          <li>Free daily limit: wait until the next UTC day, or upgrade to Pro.</li>
-          <li>Pro weekly tokens exhausted: wait for the next week, or manage billing in Settings.</li>
-        </ul>
-      </div>
+        <div>
+          <section class="panel">
+            <h2>Email</h2>
+            <p>
+              <a class="mail" data-cfg-mail="supportEmail" href="#">[SUPPORT_EMAIL]</a>
+            </p>
+            <p class="form-hint" style="margin-top: 0.6rem">
+              Set <code>supportEmail</code> in <code>config.js</code> before publishing.
+            </p>
+          </section>
 
-      <div class="panel">
-        <h2>Billing</h2>
-        <p>
-          Manage or cancel Promptly Pro from the extension: <strong>Settings → Manage
-          subscription</strong> (Stripe Customer Portal).
-        </p>
+          <section class="panel">
+            <h2>FAQ</h2>
+            <div class="faq">
+              <details>
+                <summary>How fast do you reply?</summary>
+                <p>We aim to respond to support email as soon as possible during business days.</p>
+              </details>
+              <details>
+                <summary>Where do I manage billing?</summary>
+                <p>
+                  Start from <a href="/pricing">Pricing</a> / checkout. For refunds, see the
+                  <a href="/refund">Refund Policy</a>.
+                </p>
+              </details>
+              <details>
+                <summary>Need setup help?</summary>
+                <p>Read <a href="/documentation">Documentation</a> for install steps and troubleshooting.</p>
+              </details>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
 
-    <footer class="footer">
-      <div class="wrap footer__row">
-        <span>© <span id="y"></span> Promptly</span>
-        <nav aria-label="Footer">
-          <a href="/">Home</a>
-          <a href="/privacy">Privacy</a>
-        </nav>
-      </div>
-    </footer>
-    <script>
-      document.getElementById('y').textContent = new Date().getFullYear();
-    </script>
+    <footer class="footer" data-site-footer></footer>
+    <script src="./config.js"></script>
+    <script src="./site.js"></script>
   </body>
 </html>
