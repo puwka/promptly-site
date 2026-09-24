@@ -8,6 +8,14 @@
   const ACTOR_KEY = 'promptly_admin_actor';
   const PAGE_SIZE = 50;
 
+  function storageGet(key) {
+    try {
+      return localStorage.getItem(key) || '';
+    } catch {
+      return '';
+    }
+  }
+
   const root = document.querySelector('[data-admin-root]');
   const loginView = document.querySelector('[data-view="login"]');
   const appView = document.querySelector('[data-view="app"]');
@@ -16,8 +24,8 @@
   const subForm = document.querySelector('[data-sub-form]');
 
   const state = {
-    token: localStorage.getItem(TOKEN_KEY) || '',
-    actor: localStorage.getItem(ACTOR_KEY) || '',
+    token: storageGet(TOKEN_KEY),
+    actor: storageGet(ACTOR_KEY),
     tab: 'dashboard',
     query: '',
     plan: 'all',
