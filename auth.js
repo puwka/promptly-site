@@ -86,9 +86,17 @@
     const { data, error } = await sb.rpc('link_account_installation', {
       p_installation_id: installationId,
     });
-    if (error) return { ok: false, code: 'link_failed', message: error.message };
+    if (!error && data?.ok !== false) {
+      notifyExtension('account-linked');
+      return data || { ok: true };
+    }
+    // A live site session is still a sign-in, even if the profile RPC is unavailable.
     notifyExtension('account-linked');
-    return data || { ok: true };
+    return {
+      ok: false,
+      code: 'link_failed',
+      message: error?.message || data?.error || 'Could not link this installation.',
+    };
   }
 
   async function startProCheckout() {
@@ -204,6 +212,7 @@
   }
 
   async function signOut() {
+    notifyExtension('signed-out');
     const sb = getClient();
     if (sb) await sb.auth.signOut();
     session = null;
