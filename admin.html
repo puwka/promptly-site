@@ -13,7 +13,7 @@
       href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body class="admin-body">
     <div class="admin-shell" data-admin-root>
@@ -36,11 +36,19 @@
           </div>
           <p class="admin-eyebrow">Promptly</p>
           <h1>Admin</h1>
-          <p class="lede">Separate operator access. Not linked to user accounts.</p>
+          <p class="lede">Separate operator login (not your Promptly account email).</p>
           <form class="form" data-login-form>
             <div class="form-row">
               <label for="admin-user">Username</label>
-              <input id="admin-user" name="username" type="text" autocomplete="username" required />
+              <input
+                id="admin-user"
+                name="username"
+                type="text"
+                autocomplete="username"
+                placeholder="admin"
+                spellcheck="false"
+                required
+              />
             </div>
             <div class="form-row">
               <label for="admin-pass">Password</label>
@@ -52,7 +60,7 @@
                 required
               />
             </div>
-            <button class="btn btn--primary btn--block" type="submit">Sign in</button>
+            <button class="btn btn--primary btn--block" type="submit" data-login-submit>Sign in</button>
           </form>
           <p class="form-hint" data-login-note></p>
         </article>
@@ -215,7 +223,7 @@
       </form>
     </dialog>
 
-    <script src="./config.js"></script>
-    <script src="./admin.js"></script>
+    <script src="/config.js"></script>
+    <script src="/admin.js"></script>
   </body>
 </html>

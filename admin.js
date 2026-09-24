@@ -27,6 +27,7 @@
 
   function adminUrl() {
     const base = String(cfg.supabaseUrl || '').replace(/\/$/, '');
+    if (!base) return '';
     return `${base}/functions/v1/admin`;
   }
 
@@ -43,7 +44,30 @@
     flashEl.className = `admin-flash admin-flash--${kind || 'info'}`;
   }
 
-  async function api(action, body, opts) {
+  function persistSession(token, actor) {
+    state.token = token || '';
+    state.actor = actor || '';
+    try {
+      if (token) {
+        localStorage.setItem(TOKEN_KEY, token);
+        localStorage.setItem(ACTOR_KEY, actor || '');
+      } else {
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(ACTOR_KEY);
+      }
+    } catch {
+      /* private mode / blocked storage — keep in-memory session */
+    }
+  }
+
+  async function api(action, body) {
+    const url = adminUrl();
+    if (!url) {
+      const err = new Error('Missing supabaseUrl in config.js');
+      err.code = 'config';
+      err.status = 0;
+      throw err;
+    }
     const headers = {
       'Content-Type': 'application/json',
       apikey: cfg.supabaseAnonKey || '',
@@ -52,11 +76,22 @@
     if (state.token && action !== 'login') {
       headers['x-admin-token'] = state.token;
     }
-    const res = await fetch(adminUrl(), {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ action, ...body }),
-    });
+    let res;
+    try {
+      res = await fetch(url, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ action, ...body }),
+      });
+    } catch (networkErr) {
+      const err = new Error(
+        'Network error — cannot reach admin API. Check that supabaseUrl is correct and the site is served over https.',
+      );
+      err.code = 'network';
+      err.status = 0;
+      err.cause = networkErr;
+      throw err;
+    }
     let data = null;
     try {
       data = await res.json();
@@ -229,10 +264,7 @@
   }
 
   function logout(expired) {
-    state.token = '';
-    state.actor = '';
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(ACTOR_KEY);
+    persistSession('', '');
     showView('login');
     if (expired) {
       const note = document.querySelector('[data-login-note]');
@@ -317,23 +349,44 @@
       loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const note = document.querySelector('[data-login-note]');
+        const submitBtn = document.querySelector('[data-login-submit]');
         if (note) note.textContent = '';
         const fd = new FormData(loginForm);
+        const username = String(fd.get('username') || '').trim();
+        const password = String(fd.get('password') || '').trim();
+        if (!username || !password) {
+          if (note) note.textContent = 'Enter username and password.';
+          return;
+        }
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Signing in…';
+        }
         try {
-          const data = await api('login', {
-            username: String(fd.get('username') || ''),
-            password: String(fd.get('password') || ''),
-          });
-          state.token = data.token;
-          state.actor = String(fd.get('username') || 'admin').trim();
-          localStorage.setItem(TOKEN_KEY, state.token);
-          localStorage.setItem(ACTOR_KEY, state.actor);
+          const data = await api('login', { username, password });
+          if (!data || !data.token) {
+            throw Object.assign(new Error('Login succeeded but no token returned'), { status: 502 });
+          }
+          persistSession(data.token, username);
           const actorEl = document.querySelector('[data-admin-actor]');
-          if (actorEl) actorEl.textContent = state.actor;
+          if (actorEl) actorEl.textContent = username;
           showView('app');
           setTab('dashboard');
         } catch (err) {
-          if (note) note.textContent = err.message || 'Sign in failed';
+          let msg = err.message || 'Sign in failed';
+          if (err.code === 'bad_credentials' || err.status === 401) {
+            msg = 'Invalid username or password. Use the admin operator login (username is usually “admin”), not your Promptly account.';
+          } else if (err.code === 'admin_not_configured') {
+            msg = 'Admin is not configured on the server (missing ADMIN_PASSWORD secret).';
+          } else if (err.code === 'network') {
+            msg = err.message;
+          }
+          if (note) note.textContent = msg;
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Sign in';
+          }
         }
       });
     }
