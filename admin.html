@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin — Promptly</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="/admin" />
+    <link rel="icon" href="./favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="admin-body">
+    <div class="admin-shell" data-admin-root>
+      <!-- Login -->
+      <section class="admin-login" data-view="login" hidden>
+        <article class="admin-login__card">
+          <div class="admin-login__mark" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <defs>
+                <linearGradient id="admin-mark" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#3b5bfd" />
+                  <stop offset="1" stop-color="#a78bfa" />
+                </linearGradient>
+              </defs>
+              <path
+                fill="url(#admin-mark)"
+                d="M32 4 38.2 25.8 60 32 38.2 38.2 32 60 25.8 38.2 4 32 25.8 25.8Z"
+              />
+            </svg>
+          </div>
+          <p class="admin-eyebrow">Promptly</p>
+          <h1>Admin</h1>
+          <p class="lede">Separate operator access. Not linked to user accounts.</p>
+          <form class="form" data-login-form>
+            <div class="form-row">
+              <label for="admin-user">Username</label>
+              <input id="admin-user" name="username" type="text" autocomplete="username" required />
+            </div>
+            <div class="form-row">
+              <label for="admin-pass">Password</label>
+              <input
+                id="admin-pass"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required
+              />
+            </div>
+            <button class="btn btn--primary btn--block" type="submit">Sign in</button>
+          </form>
+          <p class="form-hint" data-login-note></p>
+        </article>
+      </section>
+
+      <!-- App -->
+      <section class="admin-app" data-view="app" hidden>
+        <header class="admin-top">
+          <div class="admin-top__brand">
+            <span class="admin-top__logo" aria-hidden="true"></span>
+            <div>
+              <strong>Promptly Admin</strong>
+              <span data-admin-actor></span>
+            </div>
+          </div>
+          <nav class="admin-nav" aria-label="Admin">
+            <button type="button" class="admin-nav__btn is-active" data-tab="dashboard">Dashboard</button>
+            <button type="button" class="admin-nav__btn" data-tab="users">Users</button>
+          </nav>
+          <button type="button" class="btn btn--ghost btn--sm" data-logout>Sign out</button>
+        </header>
+
+        <main class="admin-main wrap">
+          <div class="admin-flash" data-flash hidden></div>
+
+          <!-- Dashboard -->
+          <section data-panel="dashboard" class="admin-panel">
+            <header class="admin-panel__head">
+              <h2>Dashboard</h2>
+              <button type="button" class="btn btn--ghost btn--sm" data-refresh-stats>Refresh</button>
+            </header>
+            <div class="admin-stats" data-stats>
+              <div class="admin-stat">
+                <span class="admin-stat__label">Total users</span>
+                <strong data-stat="total_users">—</strong>
+              </div>
+              <div class="admin-stat">
+                <span class="admin-stat__label">Free</span>
+                <strong data-stat="free_users">—</strong>
+              </div>
+              <div class="admin-stat">
+                <span class="admin-stat__label">Pro</span>
+                <strong data-stat="pro_users">—</strong>
+              </div>
+              <div class="admin-stat">
+                <span class="admin-stat__label">New (7d)</span>
+                <strong data-stat="new_registrations_7d">—</strong>
+              </div>
+              <div class="admin-stat">
+                <span class="admin-stat__label">New (30d)</span>
+                <strong data-stat="new_registrations_30d">—</strong>
+              </div>
+              <div class="admin-stat">
+                <span class="admin-stat__label">Active subs</span>
+                <strong data-stat="active_subscriptions">—</strong>
+              </div>
+              <div class="admin-stat admin-stat--wide">
+                <span class="admin-stat__label">Credits used (this week)</span>
+                <strong data-stat="credits_used_week">—</strong>
+              </div>
+            </div>
+          </section>
+
+          <!-- Users -->
+          <section data-panel="users" class="admin-panel" hidden>
+            <header class="admin-panel__head">
+              <h2>Users</h2>
+              <p class="admin-panel__meta" data-users-meta></p>
+            </header>
+
+            <form class="admin-filters" data-users-filter>
+              <input
+                type="search"
+                name="query"
+                placeholder="Search email or installation id"
+                aria-label="Search users"
+              />
+              <select name="plan" aria-label="Plan filter">
+                <option value="all">All plans</option>
+                <option value="free">Free</option>
+                <option value="pro">Pro</option>
+              </select>
+              <button class="btn btn--primary btn--sm" type="submit">Search</button>
+            </form>
+
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Registered</th>
+                    <th>Plan</th>
+                    <th>Status</th>
+                    <th>Expires</th>
+                    <th>Source</th>
+                    <th>Usage</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody data-users-body>
+                  <tr>
+                    <td colspan="8" class="admin-empty">Loading…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="admin-pager">
+              <button type="button" class="btn btn--ghost btn--sm" data-page-prev disabled>Previous</button>
+              <span data-page-label></span>
+              <button type="button" class="btn btn--ghost btn--sm" data-page-next disabled>Next</button>
+            </div>
+          </section>
+        </main>
+      </section>
+    </div>
+
+    <!-- Subscription modal -->
+    <dialog class="admin-dialog" data-sub-dialog>
+      <form method="dialog" class="admin-dialog__form" data-sub-form>
+        <header class="admin-dialog__head">
+          <h3>Manage subscription</h3>
+          <button type="submit" value="cancel" class="admin-dialog__close" aria-label="Close">×</button>
+        </header>
+        <p class="admin-dialog__email" data-sub-email></p>
+        <p class="admin-dialog__meta" data-sub-meta></p>
+
+        <input type="hidden" name="installation_id" />
+        <input type="hidden" name="email" />
+
+        <fieldset class="admin-fieldset">
+          <legend>Grant Pro</legend>
+          <div class="admin-chip-row">
+            <button type="button" class="admin-chip" data-days="7">7 days</button>
+            <button type="button" class="admin-chip" data-days="30">30 days</button>
+            <button type="button" class="admin-chip" data-days="90">90 days</button>
+          </div>
+          <div class="form-row">
+            <label for="sub-ends">Or end date (UTC)</label>
+            <input id="sub-ends" name="ends_at" type="date" />
+          </div>
+          <div class="form-row">
+            <label for="sub-status">Status</label>
+            <select id="sub-status" name="status">
+              <option value="active">active</option>
+              <option value="trialing">trialing</option>
+              <option value="canceling">canceling</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn--primary btn--block" data-sub-grant>Save Pro</button>
+        </fieldset>
+
+        <fieldset class="admin-fieldset admin-fieldset--danger">
+          <legend>Revoke</legend>
+          <p>Clear entitlement → Free. Stored as Manual revoke in audit log.</p>
+          <button type="button" class="btn btn--ghost btn--block" data-sub-revoke>Cancel subscription</button>
+        </fieldset>
+
+        <p class="form-hint" data-sub-note></p>
+      </form>
+    </dialog>
+
+    <script src="./config.js"></script>
+    <script src="./admin.js"></script>
+  </body>
+</html>
