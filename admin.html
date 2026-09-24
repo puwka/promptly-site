@@ -37,15 +37,16 @@
           <p class="admin-eyebrow">Promptly</p>
           <h1>Admin</h1>
           <p class="lede">Operator login only — username <code>admin</code>, not your account email.</p>
-          <form class="form" data-login-form action="#" method="post">
+          <form class="form" data-login-form action="javascript:void(0)" method="post">
             <div class="form-row">
               <label for="admin-user">Username</label>
               <input
                 id="admin-user"
                 name="username"
                 type="text"
-                autocomplete="username"
-                placeholder="admin"
+                value="admin"
+                autocomplete="off"
+                autocapitalize="off"
                 spellcheck="false"
                 required
               />
@@ -56,7 +57,7 @@
                 id="admin-pass"
                 name="password"
                 type="password"
-                autocomplete="current-password"
+                autocomplete="off"
                 required
               />
             </div>
@@ -224,6 +225,60 @@
     </dialog>
 
     <script src="/config.js"></script>
+    <script>
+      /* Inline fallback login — works even if /admin.js fails to load */
+      (function () {
+        var form = document.querySelector('[data-login-form]');
+        if (!form || form.dataset.boundInline) return;
+        form.dataset.boundInline = '1';
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var note = document.querySelector('[data-login-note]');
+          var cfg = window.PROMPTLY_CONFIG || {};
+          var user = String((form.username && form.username.value) || '').trim();
+          var pass = String((form.password && form.password.value) || '').trim();
+          if (note) note.textContent = 'Signing in…';
+          if (!cfg.supabaseUrl || !cfg.supabaseAnonKey) {
+            if (note) note.textContent = 'config.js missing supabase keys';
+            return;
+          }
+          fetch(String(cfg.supabaseUrl).replace(/\/$/, '') + '/functions/v1/admin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              apikey: cfg.supabaseAnonKey,
+              Authorization: 'Bearer ' + cfg.supabaseAnonKey,
+            },
+            body: JSON.stringify({ action: 'login', username: user, password: pass }),
+          })
+            .then(function (res) {
+              return res.json().then(function (data) {
+                return { res: res, data: data };
+              });
+            })
+            .then(function (out) {
+              if (!out.res.ok || !out.data || !out.data.token) {
+                var msg = (out.data && out.data.error) || 'Login failed (' + out.res.status + ')';
+                if (out.res.status === 401) {
+                  msg = 'Invalid login. Username must be admin (not email). Password is case-sensitive.';
+                }
+                if (note) note.textContent = msg;
+                return;
+              }
+              try {
+                localStorage.setItem('promptly_admin_token', out.data.token);
+                localStorage.setItem('promptly_admin_actor', user || 'admin');
+              } catch (err) {}
+              if (note) note.textContent = 'OK — loading…';
+              location.reload();
+            })
+            .catch(function (err) {
+              if (note) note.textContent = 'Network error: ' + (err && err.message ? err.message : err);
+            });
+        });
+      })();
+    </script>
     <script src="/admin.js"></script>
   </body>
 </html>

@@ -352,52 +352,7 @@
   }
 
   function bind() {
-    const loginForm = document.querySelector('[data-login-form]');
-    if (loginForm) {
-      loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const note = document.querySelector('[data-login-note]');
-        const submitBtn = document.querySelector('[data-login-submit]');
-        if (note) note.textContent = '';
-        const fd = new FormData(loginForm);
-        const username = String(fd.get('username') || '').trim();
-        const password = String(fd.get('password') || '').trim();
-        if (!username || !password) {
-          if (note) note.textContent = 'Enter username and password.';
-          return;
-        }
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Signing in…';
-        }
-        try {
-          const data = await api('login', { username, password });
-          if (!data || !data.token) {
-            throw Object.assign(new Error('Login succeeded but no token returned'), { status: 502 });
-          }
-          persistSession(data.token, username);
-          const actorEl = document.querySelector('[data-admin-actor]');
-          if (actorEl) actorEl.textContent = username;
-          showView('app');
-          setTab('dashboard');
-        } catch (err) {
-          let msg = err.message || 'Sign in failed';
-          if (err.code === 'bad_credentials' || err.status === 401) {
-            msg = 'Invalid username or password. Use the admin operator login (username is usually “admin”), not your Promptly account.';
-          } else if (err.code === 'admin_not_configured') {
-            msg = 'Admin is not configured on the server (missing ADMIN_PASSWORD secret).';
-          } else if (err.code === 'network') {
-            msg = err.message;
-          }
-          if (note) note.textContent = msg;
-        } finally {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Sign in';
-          }
-        }
-      });
-    }
+    // Login submit is handled by the inline script in admin.html (avoids double-bind / blank failures).
 
     document.querySelector('[data-logout]')?.addEventListener('click', () => logout(false));
     document.querySelector('[data-refresh-stats]')?.addEventListener('click', () => loadStats());
